@@ -13,5 +13,4 @@ Pygments==2.20.0
 pyparsing==3.3.2
 pytest==9.0.3
 python-dateutil==2.9.0.post0
--e git+ssh://git@github.com/jcafaasse/python-intermediate-inflammation.git@72df521e23bd54afcde7b04509959c6a76149977#egg=python_intermediate_inflammation
 six==1.17.0
