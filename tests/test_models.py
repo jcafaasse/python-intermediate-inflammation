@@ -1,5 +1,6 @@
 """Tests for statistics functions within the Model layer."""
 
+import pytest
 import numpy as np
 import numpy.testing as npt
 
@@ -29,6 +30,12 @@ def test_daily_mean_integers():
     # Need to use Numpy testing functions to compare arrays
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
+def test_daily_mean_strings():
+    """ Test for TypeError when parsing strings"""
+
+    with pytest.raises(TypeError):
+        error_expected = daily_max(["Hello", "there"])
+
 def test_daily_max_integers():
     """Test that max function works for an array of integers."""
 
@@ -39,6 +46,12 @@ def test_daily_max_integers():
 
     npt.assert_array_equal(daily_max(test_input), test_result)
 
+def test_daily_max_strings():
+    """ Test for TypeError when parsing strings"""
+
+    with pytest.raises(TypeError):
+        error_expected = daily_max(["Hello", "there"])
+
 def test_daily_min_integers():
     """Test that min function works for an array of integers."""
 
@@ -48,4 +61,10 @@ def test_daily_min_integers():
     test_result = np.array([-3, 0])
 
     npt.assert_array_equal(daily_min(test_input), test_result)
+
+def test_daily_min_string():
+    """ Test for TypeError when parsing string """
+
+    with pytest.raises(TypeError):
+        daily_min(["Hello", "there"])
 
