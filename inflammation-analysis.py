@@ -13,11 +13,11 @@ def main(args):
     - selecting the necessary models and views for the current task
     - passing data between models and views
     """
-    InFiles = args.infiles
-    if not isinstance(InFiles, list):
-        InFiles = [args.infiles]
+    inflammation_files = args.infiles
+    if not isinstance(inflammation_files, list):
+        inflammation_files = [args.infiles]
 
-    for filename in InFiles:
+    for filename in inflammation_files:
         inflammation_data = models.load_csv(filename)
 
         view_data = {
