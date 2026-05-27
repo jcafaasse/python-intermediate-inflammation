@@ -2,8 +2,9 @@
 """Software for managing and analysing patients' inflammation data in our imaginary hospital."""
 
 import argparse
+import os
 
-from inflammation import models, views
+from inflammation import models, views, analysis
 
 
 def main(args):
@@ -25,8 +26,23 @@ def main(args):
             "max": models.daily_max(inflammation_data),
             "min": models.daily_min(inflammation_data),
         }
+        if args.output_dir:
+            views.visualize(
+                view_data,
+                filename=os.path.basename(filename),
+                output_dir=args.output_dir,
+            )
+        else:
+            views.visualize(view_data)
 
-        views.visualize(view_data)
+    data_dir = os.path.dirname(inflammation_files[0])
+    _, extension = os.path.splitext(inflammation_files[0])
+    if extension == ".csv":
+        data_source = analysis.CSVDataSource(data_dir)
+    elif extension == ".json":
+        data_source = analysis.JSONDataSource(data_dir)
+    data = data_source.load_inflammation_data()
+    print(models.daily_max(data))
 
 
 if __name__ == "__main__":
@@ -39,6 +55,8 @@ if __name__ == "__main__":
         nargs="+",
         help="Input CSV(s) containing inflammation series for each patient",
     )
+
+    parser.add_argument("-output_dir", help="Output directory to save figures as PNG")
 
     args = parser.parse_args()
 

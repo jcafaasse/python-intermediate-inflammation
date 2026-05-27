@@ -2,9 +2,10 @@
 
 from matplotlib import pyplot as plt
 import numpy as np
+import os
 
 
-def visualize(data_dict):
+def visualize(data_dict, filename: str=None, output_dir: str=None):
     """Display plots of basic statistical properties of the inflammation data.
 
     :param data_dict: Dictionary of name -> data to plot
@@ -21,5 +22,7 @@ def visualize(data_dict):
         axes.plot(data)
 
     fig.tight_layout()
-
-    plt.show()
+    if output_dir is not None:
+        plt.savefig(os.path.join(output_dir, f"figure_{filename}.png"))
+    else:
+        plt.show()
