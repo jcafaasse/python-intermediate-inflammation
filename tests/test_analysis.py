@@ -1,8 +1,8 @@
 import os
 import numpy as np
+import numpy.testing as npt
 
 from inflammation.analysis import analyse_data
-import numpy.testing as npt
 
 
 def test_analyse_data():
